@@ -1,0 +1,23 @@
+div#gamba_menu button {
+    background-color: black;
+    color: white;
+    width: 100px;
+    height: 30px;
+    border-width: 0px;
+    cursor: pointer;
+    display: block;
+}
+
+div#gamba_menu button:first-child {
+    border-top-left-radius: 9px;
+    border-top-right-radius: 9px;
+}
+
+div#gamba_menu button:last-child {
+    border-bottom-left-radius: 9px;
+    border-bottom-right-radius: 9px;
+}
+
+div#gamba_menu button:hover {
+    background-color: #333;
+}
