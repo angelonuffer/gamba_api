@@ -24,6 +24,17 @@ function Menu(actions) {
     });
 };
 
+function Tool(url) {
+    var self = this;
+    self.url = url;
+    jQuery.get(self.url, function(text) {
+        tool = eval("(" + text + ")");
+        self.name = tool.name;
+        self.icon_url = tool.icon;
+        self.type = tool.type;
+    });
+};
+
 jQuery.fn.setMenu = function(menu) {
     this.contextmenu(function(event) {
         gamba_menu.css({

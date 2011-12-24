@@ -1,0 +1,5 @@
+{
+    name: "test tool",
+    icon: "unexistent.png",
+    type: "clickable"
+}

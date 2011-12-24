@@ -62,3 +62,18 @@ test("it binds to an element", function() {
     menu.hide();
     element.remove();
 });
+
+module("Tool");
+
+test("it loads a tool from json url", function() {
+    expect(4);
+    stop();
+    $(document.body).ajaxComplete(function() {
+        equal(tool.url, "test_tool.json");
+        equal(tool.name, "test tool");
+        equal(tool.icon_url, "unexistent.png");
+        equal(tool.type, "clickable");
+        start();
+    });
+    var tool = new Tool("test_tool.json");
+});
