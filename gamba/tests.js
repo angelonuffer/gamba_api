@@ -68,12 +68,27 @@ module("Tool");
 test("it loads a tool from json url", function() {
     expect(4);
     stop();
+    $(document.body).unbind("ajaxComplete");
     $(document.body).ajaxComplete(function() {
-        equal(tool.url, "test_tool.json");
+        equal(tool.url, "test_tools/selectable.json");
         equal(tool.name, "test tool");
         equal(tool.icon_url, "unexistent.png");
-        equal(tool.type, "clickable");
+        equal(tool.type, "selectable");
         start();
     });
-    var tool = new Tool("test_tool.json");
+    var tool = new Tool("test_tools/selectable.json");
+});
+
+module("Selectable tool");
+
+test("it has 2 handlers", function() {
+    expect(2);
+    stop();
+    $(document.body).unbind("ajaxComplete");
+    $(document.body).ajaxComplete(function() {
+        equal(typeof tool.select, "function");
+        equal(typeof tool.unselect, "function");
+        start();
+    });
+    var tool = new SelectableTool("test_tools/selectable.json");
 });

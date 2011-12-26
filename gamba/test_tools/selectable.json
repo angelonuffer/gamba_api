@@ -1,0 +1,11 @@
+{
+    name: "test tool",
+    icon: "unexistent.png",
+    type: "selectable",
+    select: function() {
+        // do some stuff
+    },
+    unselect: function() {
+        // do some stuff
+    }
+}

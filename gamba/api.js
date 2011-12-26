@@ -27,12 +27,23 @@ function Menu(actions) {
 function Tool(url) {
     var self = this;
     self.url = url;
+    self.ready = function() {};
     jQuery.get(self.url, function(text) {
-        tool = eval("(" + text + ")");
-        self.name = tool.name;
-        self.icon_url = tool.icon;
-        self.type = tool.type;
+        self.tool_context = eval("(" + text + ")");
+        self.name = self.tool_context.name;
+        self.icon_url = self.tool_context.icon;
+        self.type = self.tool_context.type;
+        self.ready();
     });
+};
+
+function SelectableTool(url) {
+    var self = this;
+    Tool.call(self, url);
+    self.ready = function() {
+        self.select = self.tool_context.select;
+        self.unselect = self.tool_context.unselect;
+    };
 };
 
 jQuery.fn.setMenu = function(menu) {
