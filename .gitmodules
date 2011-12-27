@@ -1,0 +1,6 @@
+[submodule "gamba/jquery"]
+	path = gamba/jquery
+	url = git@github.com:jquery/jquery.git
+[submodule "gamba/qunit"]
+	path = gamba/qunit
+	url = git@github.com:jquery/qunit.git
