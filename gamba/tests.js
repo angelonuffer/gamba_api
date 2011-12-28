@@ -30,7 +30,7 @@ test("it has actions", function() {
     equal(menu.actions[1], action2);
 });
 
-test("it creates an element on page", function() {
+test("it creates elements on gamba_menu", function() {
     var action1 = new Action("action1");
     var action2 = new Action("action2");
     equal($("div#gamba_menu").length, 1);
@@ -91,4 +91,44 @@ test("it has 2 handlers", function() {
         start();
     });
     var tool = new SelectableTool("test_tools/selectable.json");
+});
+
+module("Toolbar");
+
+test("it has \"add tool\" action", function() {
+    expect(2);
+    stop();
+    $(document.body).unbind("ajaxComplete");
+    $(document.body).ajaxComplete(function() {
+        toolbar.addTool(tool);
+        equal(toolbar.selectable_tools[0], tool);
+        equal(toolbar.selectable_tools.length, 1);
+        start();
+    });
+    var toolbar = new Toolbar();
+    var tool = new SelectableTool("test_tools/selectable.json");
+    toolbar.element.remove();
+});
+
+test("it has default tools", function() {
+    expect(2);
+    stop();
+    $(document.body).unbind("ajaxComplete");
+    $(document.body).ajaxComplete(function() {
+        equal(toolbar.selectable_tools[0], tool);
+        equal(toolbar.selectable_tools.length, 1);
+        start();
+    });
+    var tool = new SelectableTool("test_tools/selectable.json");
+    var toolbar = new Toolbar(default_tools=[
+        tool
+    ]);
+    toolbar.element.remove();
+});
+
+test("it creates an element on page", function() {
+    equal($("div.gamba_toolbar").length, 0);
+    var toolbar = new Toolbar();
+    equal($("div.gamba_toolbar").length, 1);
+    toolbar.element.remove();
 });

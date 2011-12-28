@@ -21,3 +21,8 @@ div#gamba_menu button:last-child {
 div#gamba_menu button:hover {
     background-color: #333;
 }
+
+div.gamba_toolbar img {
+    width: 30px;
+    height: 30px;
+}
