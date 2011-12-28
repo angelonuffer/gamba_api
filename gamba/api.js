@@ -36,9 +36,10 @@ function Tool(url) {
         self.name = self.tool_context.name;
         self.icon_url = self.tool_context.icon;
         self.type = self.tool_context.type;
-        self.element = $("<img />").attr({
+        self.element = $("<div />").addClass("tool")
+        self.element.append($("<img />").attr({
             src: self.icon_url
-        });
+        }));
         $(self.ready_functions).each(function(i, ready) {
             ready();
         });
@@ -62,6 +63,14 @@ function Toolbar(default_tools) {
             self.selectable_tools.push(tool);
         };
         self.element.append(tool.element);
+        tool.element.click(function() {
+            $(self.selectable_tools).each(function(i, tool) {
+                tool.unselect();
+                tool.element.removeClass("selected");
+            });
+            tool.element.addClass("selected");
+            tool.select();
+        });
     };
     self.add_tool_action = new Action("add tool", function() {
         var tool = new SelectableTool("line.json");
