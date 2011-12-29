@@ -1,3 +1,7 @@
+div#gamba_menu {
+    z-index: 100;
+}
+
 div#gamba_menu button {
     background-color: black;
     color: white;

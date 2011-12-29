@@ -4,3 +4,6 @@
 [submodule "gamba/qunit"]
 	path = gamba/qunit
 	url = git@github.com:jquery/qunit.git
+[submodule "gamba/jquery-ui"]
+	path = gamba/jquery-ui
+	url = git@github.com:jquery/jquery-ui.git

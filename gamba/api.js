@@ -27,6 +27,7 @@ function Menu(actions) {
 function Tool(url) {
     var self = this;
     self.url = url;
+    self.element = $("<div />").addClass("tool")
     self.ready_functions = [];
     self.ready = function(ready) {
         self.ready_functions.push(ready);
@@ -36,7 +37,6 @@ function Tool(url) {
         self.name = self.tool_context.name;
         self.icon_url = self.tool_context.icon;
         self.type = self.tool_context.type;
-        self.element = $("<div />").addClass("tool")
         self.element.append($("<img />").attr({
             src: self.icon_url
         }));
@@ -73,8 +73,19 @@ function Toolbar(default_tools) {
         });
     };
     self.add_tool_action = new Action("add tool", function() {
-        var tool = new SelectableTool("line.json");
-        self.addTool(tool);
+        var add_tool = $("<div />");
+        var tool_url = $("<input />").attr({type: "text"});
+        tool_url.keyup(function() {
+            if (event.keyCode == 13) {
+                var tool = new SelectableTool(tool_url[0].value);
+                self.addTool(tool);
+            };
+        });
+        add_tool.append(tool_url).dialog({
+            title: "Add tool",
+            show: "blind",
+            hide: "blind"
+        });
     });
     self.menu = new Menu([self.add_tool_action]);
     $(default_tools).each(function(i, tool) {
