@@ -71,6 +71,19 @@ function Toolbar(default_tools) {
             tool.element.addClass("selected");
             tool.select();
         });
+        tool.remove_action = new Action("remove tool", function() {
+            self.selectable_tools.filter(function(tool_value) {
+                if (tool_value != tool) {
+                    tool.element.remove();
+                    return false;
+                }
+                else {
+                    return true;
+                };
+            });
+        });
+        tool.menu = new Menu([tool.remove_action]);
+        tool.element.setMenu(tool.menu);
     };
     self.add_tool_action = new Action("add tool", function() {
         var add_tool = $("<div />");
