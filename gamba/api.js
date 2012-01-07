@@ -64,16 +64,23 @@ function Toolbar(default_tools) {
         };
         self.element.append(tool.element);
         tool.element.click(function() {
-            $(self.selectable_tools).each(function(i, tool) {
+            if (tool.element.hasClass("selected")) {
                 tool.unselect();
                 tool.element.removeClass("selected");
-            });
-            tool.element.addClass("selected");
-            tool.select();
+            }
+            else {
+                $(self.selectable_tools).each(function(i, tool) {
+                    tool.unselect();
+                    tool.element.removeClass("selected");
+                });
+                tool.element.addClass("selected");
+                tool.select();
+            };
         });
         tool.remove_action = new Action("remove tool", function() {
             self.selectable_tools.filter(function(tool_value) {
                 if (tool_value != tool) {
+                    tool.unselect();
                     tool.element.remove();
                     return false;
                 }
